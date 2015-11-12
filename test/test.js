@@ -13,3 +13,8 @@ PalettoTestCase.prototype.test_firstStory = function () {
     assertEquals(x.check_board_length(), 36);
     assertEquals(x.juxtaposition(), 0);
 };
+
+PalettoTestCase.prototype.test_secondStory = function () {
+    assertTrue(x.check_player() === 1);
+    assertTrue(x.check_corner("yellow") === true);
+};
