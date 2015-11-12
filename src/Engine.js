@@ -1,19 +1,18 @@
 // created by TRABELSI Nadir
 
-'use strict';
+//'use strict';
 
 var Engine = function () {
-    var board = new Array(6);
-    var line, column;
-    for(line = 0; line < 6; line++) {
+    var board = new Array(6), line, column;
+    for (line = 0; line < 6; line++) {
         board[line] = new Array(6);
     }
 
-    this.initialisation = function() {
-        this.initialisation_board()
+    this.initialisation = function () {
+        this.initialisation_board();
     };
 
-    this.initialisation_board = function() {
+    this.initialisation_board = function () {
         board[0][0] = "Black";
         board[0][1] = "Green";
         board[0][2] = "White";
@@ -61,16 +60,20 @@ var Engine = function () {
         return ((board.length) * (board.length));
     };
 
-    this.juxtaposition = function() {
+    this.check_near = function () {
+        return ((board[line][column] === board[line + 1][column]) ||
+                (board[line][column] === board[line - 1][column]) ||
+                (board[line][column] === board[line][column + 1]) ||
+                (board[line][column] === board[line][column - 1]));
+    };
+
+    this.juxtaposition = function () {
         var juxtaposition = 0;
 
-        var line = 1;
+        line = 1;
         do {
             for (column = 1; column < board.length - 2; column++) {
-                if ((board[line][column] == board[line + 1][column])
-                    || (board[line][column] == board[line - 1][column])
-                    || (board[line][column] == board[line][column + 1])
-                    || (board[line][column] == board[line][column - 1])) {
+                if (this.check_near()) {
                     juxtaposition = 1;
                 }
             }
