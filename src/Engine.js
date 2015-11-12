@@ -3,13 +3,14 @@
 //'use strict';
 
 var Engine = function () {
-    var board = new Array(6), line, column;
+    var board = new Array(6), line, column, player;
     for (line = 0; line < 6; line++) {
         board[line] = new Array(6);
     }
 
     this.initialisation = function () {
         this.initialisation_board();
+        player = 1;
     };
 
     this.initialisation_board = function () {
@@ -81,5 +82,14 @@ var Engine = function () {
 
         } while (line < 5);
         return juxtaposition;
+    };
+
+    this.check_player = function () {
+        return player;
+    };
+
+    this.check_corner = function (color) {
+        return (board[0][0] === color) || (board[0][5] === color) ||
+            (board[5][0] === color) || (board[5][5] === color);
     };
 };

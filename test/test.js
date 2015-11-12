@@ -16,5 +16,5 @@ PalettoTestCase.prototype.test_firstStory = function () {
 
 PalettoTestCase.prototype.test_secondStory = function () {
     assertTrue(x.check_player() === 1);
-    assertTrue(x.check_corner("yellow") === true);
+    assertTrue(x.check_corner("Yellow") === true);
 };
