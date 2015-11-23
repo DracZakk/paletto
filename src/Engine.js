@@ -98,13 +98,8 @@ var Engine = function () {
         return column.charCodeAt(0) - 65;
     };
 
-    this.remove_piece = function (line, column, player) {
-        column = this.get_int_column(column);
-        var result = false, piece = board[line - 1][column];
-        if (board[line - 1][column] !== undefined) {
-            board[line - 1][column] = undefined;
-            result = true;
-        }
+    this.add_pieces_player = function (line, column, player) {
+        var piece = board[line - 1][column];
         if (player === 1) {
             player1.unshift(piece);
             player1_pieces++;
@@ -112,6 +107,16 @@ var Engine = function () {
             player2.unshift(piece);
             player2_pieces++;
         }
+    };
+
+    this.remove_piece = function (line, column, player) {
+        column = this.get_int_column(column);
+        var result = false;
+        if (board[line - 1][column] !== undefined) {
+            board[line - 1][column] = undefined;
+            result = true;
+        }
+        this.add_pieces_player(line, column, player);
         return result;
     };
 
