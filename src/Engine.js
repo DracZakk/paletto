@@ -3,7 +3,8 @@
 //'use strict';
 
 var Engine = function () {
-    var board = new Array(6), line, column, player;
+    var board = new Array(6), line, column, player, player1 = new Array(0), player2 = new Array(0),
+        player1_pieces = 0, player2_pieces = 0;
     for (line = 0; line < 6; line++) {
         board[line] = new Array(6);
     }
@@ -91,5 +92,47 @@ var Engine = function () {
     this.check_corner = function (color) {
         return (board[0][0] === color) || (board[0][5] === color) ||
             (board[5][0] === color) || (board[5][5] === color);
+    };
+
+    this.get_int_column = function (column) {
+        return column.charCodeAt(0) - 65;
+    };
+
+    this.remove_piece = function (line, column, player) {
+        column = this.get_int_column(column);
+        var result = false, piece = board[line - 1][column];
+        if (board[line - 1][column] !== undefined) {
+            board[line - 1][column] = undefined;
+            result = true;
+        }
+        if (player === 1) {
+            player1.unshift(piece);
+            player1_pieces++;
+        } else {
+            player2.unshift(piece);
+            player2_pieces++;
+        }
+        return result;
+    };
+
+    this.get_nb_board_pieces = function () {
+        var result = 0;
+        for (line = 0; line < 6; line++) {
+            for (column = 0; column < 6; column++) {
+                if (board[line][column] !== undefined) {
+                    result++;
+                }
+            }
+        }
+        return result;
+    };
+
+    this.get_nb_player_pieces = function (player) {
+        if (player === 1) {
+            return player1_pieces;
+        }
+        if (player === 2) {
+            return player2_pieces;
+        }
     };
 };
