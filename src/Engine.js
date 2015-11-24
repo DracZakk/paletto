@@ -182,15 +182,19 @@ var Engine = function () {
             this.check_right(i, j);
     };
 
+    this.update_colors = function (colors, i, j) {
+        if (colors.indexOf(board[i][j]) < 0) {
+            if (this.get_nb_neighbours(i, j) < 3) {
+                colors.push(board[i][j]);
+            }
+        }
+    };
+
     this.possible_stroke = function () {
         var colors = [], i, j;
         for (i = 0; i < 6; i++) {
             for (j = 0; j < 6; j++) {
-                if (colors.indexOf(board[i][j]) < 0) {
-                    if (this.get_nb_neighbours(i, j) < 3) {
-                        colors.push(board[i][j]);
-                    }
-                }
+                this.update_colors(colors, i, j);
             }
         }
         return colors;
