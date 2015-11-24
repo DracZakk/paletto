@@ -27,3 +27,17 @@ PalettoTestCase.prototype.test_thirdStory = function () {
     assertEquals(x.get_nb_board_pieces(), 35);
     assertEquals(x.get_nb_player_pieces(1), 1);
 };
+
+PalettoTestCase.prototype.test_fourthStory = function () {
+    assertTrue(x.possible_stroke.indexOf("Black") !== -1);
+    assertTrue(x.possible_stroke.indexOf("White") !== -1);
+    assertTrue(x.possible_stroke.indexOf("Blue") !== -1);
+    x.change_player();
+    assertTrue(x.check_player() === 2);
+    var column = "A", line = 1;
+    assertEquals(x.remove_piece(line, column, 2), true);
+    column = "F";
+    line = 6;
+    assertEquals(x.remove_piece(line, column, 2), true);
+    assertEquals(x.get_nb_player_pieces(2), 2);
+};
