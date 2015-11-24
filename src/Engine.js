@@ -140,4 +140,68 @@ var Engine = function () {
             return player2_pieces;
         }
     };
+
+    this.check_up = function (i, j) {
+        if (i - 1 >= 0) {
+            if (board[i - 1][j] !== 0) {
+                return 1;
+            }
+        }
+        return 0;
+    };
+
+    this.check_down = function (i, j) {
+        if (i + 1 < 6) {
+            if (board[i + 1][j] !== 0) {
+                return 1;
+            }
+        }
+        return 0;
+    };
+
+    this.check_left = function (i, j) {
+        if (j - 1 >= 0) {
+            if (board[i][j - 1] !== 0) {
+                return 1;
+            }
+        }
+        return 0;
+    };
+
+    this.check_right = function (i, j) {
+        if (j + 1 < 6) {
+            if (board[i][j + 1] !== 0) {
+                return 1;
+            }
+        }
+        return 0;
+    };
+
+    this.get_nb_neighbours = function (i, j) {
+        return this.check_up(i, j) + this.check_down(i, j) + this.check_left(i, j) +
+            this.check_right(i, j);
+    };
+
+    this.possible_stroke = function () {
+        var colors = [], i, j;
+        for (i = 0; i < 6; i++) {
+            for (j = 0; j < 6; j++) {
+                if (colors.indexOf(board[i][j]) < 0) {
+                    if (this.get_nb_neighbours(i, j) < 3) {
+                        colors.push(board[i][j]);
+                    }
+                }
+            }
+        }
+        return colors;
+    };
+
+    this.change_player = function () {
+        if (player === 1) {
+            player = 2;
+        } else {
+            player = 1;
+        }
+        return player;
+    };
 };
