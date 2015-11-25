@@ -42,3 +42,35 @@ PalettoTestCase.prototype.test_fourthStory = function () {
     assertEquals(x.remove_piece(line, column, 2), true);
     assertEquals(x.get_nb_player_pieces(2), 2);
 };
+
+PalettoTestCase.prototype.test_fifthStory = function () {
+    x = new Engine();
+    x.initialisation_fifth_story();
+
+    var column = "D", line = 1;
+    assertTrue(x.isPossible(line, column));
+
+    column = "F";
+    line = 1;
+    assertTrue(x.isPossible(line, column));
+
+    column = "C";
+    line = 3;
+    assertFalse(x.isPossible(line, column));
+
+    column = "E";
+    line = 3;
+    assertTrue(x.isPossible(line, column));
+
+    column = "A";
+    line = 4;
+    assertTrue(x.isPossible(line, column));
+
+    column = "B";
+    line = 5;
+    assertTrue(x.isPossible(line, column));
+
+    column = "C";
+    line = 6;
+    assertTrue(x.isPossible(line, column));
+};
