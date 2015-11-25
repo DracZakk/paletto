@@ -258,7 +258,71 @@ var Engine = function () {
         board[5][5] = "undefined";
     };
 
-    this.isPossible = function (line, column) {
+    this.get_vertical = function (line, column) {
+        var vertical = '';
+        if (this.check_up(line, column)) {
+            vertical += 'up';
+        }
+        if (this.check_down(line, column)) {
+            vertical += 'down';
+        }
+        return vertical;
+    };
+
+    this.get_horizontal = function (line, column) {
+        var horizontal = '';
+        if (this.check_left(line, column)) {
+            horizontal += 'left';
+        }
+        if (this.check_right(line, column)) {
+            horizontal += 'right';
+        }
+        return horizontal;
+    };
+
+    this.check_up_pos = function (line, column, position) {
+        if (position === 'upleft') {
+            return board[line - 1][column - 1] !== undefined;
+        }
+
+        if (position === 'upright') {
+            return board[line - 1][column + 1] !== undefined;
+        }
+
+        return null;
+    };
+
+    this.check_down_pos = function (line, column, position) {
+        if (position === 'downleft') {
+            return board[line + 1][column - 1] !== undefined;
+        }
+
+        if (position === 'downright') {
+            return board[line + 1][column + 1] !== undefined;
+        }
+    };
+
+    this.check_pos = function (line, column, position) {
+        var res = this.check_up_pos(line, column, position);
+        if (res === null) {
+            return this.check_down_pos(line, column, position);
+        }
+        return res;
+    };
+
+    this.get_neigh_pos = function (line, column) {
+        return this.get_horizontal(line, column) + this.get_vertical(line, column);
+    };
+
+    this.check_connected = function (line, column) {
+        var res = this.get_neigh_pos(line, column);
+        if (res === 'updown' || res === 'leftright') {
+            return false;
+        }
+        return this.check_pos(line, column, res);
+    };
+
+    this.is_possible = function (line, column) {
         column = this.get_int_column(column);
         var neigh = this.get_nb_neighbours(line, column);
         if (neigh > 4) {
@@ -266,40 +330,7 @@ var Engine = function () {
         }
 
         if (neigh === 2) {
-            var vertical = '', horizontal = '', res = '';
-            if (this.getUp(line, column)) {
-                vertical += 'up';
-            }
-            if (this.getDown(line, column)) {
-                vertical += 'down';
-            }
-            if (this.getLeft(line, column)) {
-                horizontal += 'left';
-            }
-            if (this.getRight(line, column)) {
-                horizontal += 'right';
-            }
-            res = vertical + horizontal;
-
-            if (res === 'updown' || res === 'leftright') {
-                return false;
-            }
-
-            if (res === 'upleft') {
-                return board[line - 1][column - 1] !== undefined;
-            }
-
-            if (res === 'upright') {
-                return board[line - 1][column + 1] !== undefined;
-            }
-
-            if (res === 'downleft') {
-                return board[line + 1][column - 1] !== undefined;
-            }
-
-            if (res === 'downright') {
-                return board[line + 1][column + 1] !== undefined;
-            }
+            return this.check_connected(line, column);
         }
 
         return board[line][column] !== undefined;

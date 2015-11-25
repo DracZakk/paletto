@@ -48,29 +48,29 @@ PalettoTestCase.prototype.test_fifthStory = function () {
     x.initialisation_fifth_story();
 
     var column = "D", line = 1;
-    assertTrue(x.isPossible(line, column));
+    assertTrue(x.is_possible(line, column));
 
     column = "F";
     line = 1;
-    assertTrue(x.isPossible(line, column));
+    assertTrue(x.is_possible(line, column));
 
     column = "C";
     line = 3;
-    assertTrue(x.isPossible(line, column));
+    assertTrue(x.is_possible(line, column));
 
     column = "E";
     line = 3;
-    assertTrue(x.isPossible(line, column));
+    assertTrue(x.is_possible(line, column));
 
     column = "A";
     line = 4;
-    assertTrue(x.isPossible(line, column));
+    assertTrue(x.is_possible(line, column));
 
     column = "B";
     line = 5;
-    assertTrue(x.isPossible(line, column));
+    assertTrue(x.is_possible(line, column));
 
     column = "C";
     line = 6;
-    //assertTrue(x.isPossible(line, column));
+    //assertTrue(x.is_possible(line, column));
 };
