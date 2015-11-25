@@ -208,4 +208,100 @@ var Engine = function () {
         }
         return player;
     };
+
+    this.initialisation_fifth_story = function () {
+        this.initialisation_board_fifth_story();
+        player = 1;
+    };
+
+    this.initialisation_board_fifth_story = function () {
+        board[0][0] = "undefined";
+        board[0][1] = "undefined";
+        board[0][2] = "undefined";
+        board[0][3] = "Blue";
+        board[0][4] = "Red";
+        board[0][5] = "White";
+
+        board[1][0] = "undefined";
+        board[1][1] = "undefined";
+        board[1][2] = "undefined";
+        board[1][3] = "Red";
+        board[1][4] = "Yellow";
+        board[1][5] = "undefined";
+
+        board[2][0] = "undefined";
+        board[2][1] = "undefined";
+        board[2][2] = "Blue";
+        board[2][3] = "White";
+        board[2][4] = "Black";
+        board[2][5] = "undefined";
+
+        board[3][0] = "Red";
+        board[3][1] = "Black";
+        board[3][2] = "Red";
+        board[3][3] = "undefined";
+        board[3][4] = "undefined";
+        board[3][5] = "undefined";
+
+        board[4][0] = "undefined";
+        board[4][1] = "Green";
+        board[4][2] = "Yellow";
+        board[4][3] = "undefined";
+        board[4][4] = "undefined";
+        board[4][5] = "undefined";
+
+        board[5][0] = "undefined";
+        board[5][1] = "undefined";
+        board[5][2] = "Black";
+        board[5][3] = "undefined";
+        board[5][4] = "undefined";
+        board[5][5] = "undefined";
+    };
+
+    this.isPossible = function (line, column) {
+        column = this.get_int_column(column);
+        var neigh = this.get_nb_neighbours(line, column);
+        if (neigh > 4) {
+            return false;
+        }
+
+        if (neigh === 2) {
+            var vertical = '', horizontal = '', res = '';
+            if (this.getUp(line, column)) {
+                vertical += 'up';
+            }
+            if (this.getDown(line, column)) {
+                vertical += 'down';
+            }
+            if (this.getLeft(line, column)) {
+                horizontal += 'left';
+            }
+            if (this.getRight(line, column)) {
+                horizontal += 'right';
+            }
+            res = vertical + horizontal;
+
+            if (res === 'updown' || res === 'leftright') {
+                return false;
+            }
+
+            if (res === 'upleft') {
+                return board[line - 1][column - 1] !== undefined;
+            }
+
+            if (res === 'upright') {
+                return board[line - 1][column + 1] !== undefined;
+            }
+
+            if (res === 'downleft') {
+                return board[line + 1][column - 1] !== undefined;
+            }
+
+            if (res === 'downright') {
+                return board[line + 1][column + 1] !== undefined;
+            }
+        }
+
+        return board[line][column] !== undefined;
+    };
 };
