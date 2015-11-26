@@ -5,8 +5,8 @@
 var Engine = function () {
     var board = new Array(6), line, column, player, player1 = new Array(0), player2 = new Array(0),
         player1_pieces = 0, player2_pieces = 0,
-        p1_black = 0, p1_yellow = 0, p1_green = 0, p1_blue = 0, p1_red = 0, p1_white = 0,
-        p2_black = 0, p2_yellow = 0, p2_green = 0, p2_blue = 0, p2_red = 0, p2_white = 0;
+        p1_black = 0, p1_yellow = 0, p1_green = 0, p1_blue = 0, p1_red = 0, p1_white = 0;
+        //p2_black = 0, p2_yellow = 0, p2_green = 0, p2_blue = 0, p2_red = 0, p2_white = 0;
 
     for (line = 0; line < 6; line++) {
         board[line] = new Array(6);
@@ -371,6 +371,14 @@ var Engine = function () {
     this.win = function () {
         if (this.check_player1_win_with_black(1) === 1) {
             return 1;
+        }
+    };
+
+    this.win_empty = function (player) {
+        if (player === 1) {
+            if (this.get_nb_board_pieces() === 0) {
+                return 1;
+            }
         }
     };
 };

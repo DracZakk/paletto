@@ -378,5 +378,5 @@ PalettoTestCase.prototype.test_seventhStory = function () {
     line = 4;
     assertEquals(x.remove_piece(line, column, 1), true);
 
-    assertEquals(x.win_empty(), 1);
+    assertEquals(x.win_empty(1), 1);
 };
