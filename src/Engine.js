@@ -359,13 +359,18 @@ var Engine = function () {
         return board[line][column] !== undefined;
     };
 
-    this.win = function () {
-        if (p1_black === 6 || p1_yellow === 6 || p1_green === 6 || p1_blue === 6 || p1_red === 6 || p1_white === 6) {
-            return 1;
 
+    this.check_player1_win_with_black = function (player) {
+        if (player === 1) {
+            if (p1_black === 6) {
+                return 1;
+            }
         }
-        if (p2_black === 6 || p2_yellow === 6 || p2_green === 6 || p2_blue === 6 ||  p2_red === 6 || p2_white === 6) {
-            return 2;
+    };
+
+    this.win = function () {
+        if (this.check_player1_win_with_black(1) === 1) {
+            return 1;
         }
     };
 };
