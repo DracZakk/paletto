@@ -4,7 +4,10 @@
 
 var Engine = function () {
     var board = new Array(6), line, column, player, player1 = new Array(0), player2 = new Array(0),
-        player1_pieces = 0, player2_pieces = 0;
+        player1_pieces = 0, player2_pieces = 0,
+        p1_black = 0, p1_yellow = 0, p1_green = 0, p1_blue = 0, p1_red = 0, p1_white = 0,
+        p2_black = 0, p2_yellow = 0, p2_green = 0, p2_blue = 0, p2_red = 0, p2_white = 0;
+
     for (line = 0; line < 6; line++) {
         board[line] = new Array(6);
     }
@@ -109,9 +112,29 @@ var Engine = function () {
         }
     };
 
+    this.add_color_counter = function (line, column, player) {
+        var piece = board[line - 1][column];
+        if (player === 1) {
+            if (piece === "Yellow") {
+                p1_yellow++;
+            } else if (piece === "Black") {
+                p1_black++;
+            } else if (piece === "Red") {
+                p1_red++;
+            } else if (piece === "Green") {
+                p1_green++;
+            } else if (piece === "Blue") {
+                p1_blue++;
+            } else if (piece === "White") {
+                p1_white++;
+            }
+        }
+    };
+
     this.remove_piece = function (line, column, player) {
         column = this.get_int_column(column);
         var result = false;
+        this.add_color_counter(line, column, player);
         if (board[line - 1][column] !== undefined) {
             board[line - 1][column] = undefined;
             result = true;
@@ -334,5 +357,15 @@ var Engine = function () {
         }
 
         return board[line][column] !== undefined;
+    };
+
+    this.win = function () {
+        if (p1_black === 6 || p1_yellow === 6 || p1_green === 6 || p1_blue === 6 || p1_red === 6 || p1_white === 6) {
+            return 1;
+
+        }
+        if (p2_black === 6 || p2_yellow === 6 || p2_green === 6 || p2_blue === 6 ||  p2_red === 6 || p2_white === 6) {
+            return 2;
+        }
     };
 };
