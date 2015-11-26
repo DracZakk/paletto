@@ -74,3 +74,121 @@ PalettoTestCase.prototype.test_fifthStory = function () {
     line = 6;
     //assertTrue(x.is_possible(line, column));
 };
+
+PalettoTestCase.prototype.test_sixthStory = function () {
+    x = new Engine();
+    x.initialisation();
+
+    //BLACK
+    var column = "A", line = 1;
+    assertEquals(x.remove_piece(line, column, 1), true);
+    column = "F";
+    line = 6;
+    assertEquals(x.remove_piece(line, column, 1), true);
+
+    //GREEN
+    x.change_player();
+    assertTrue(x.check_player() === 2);
+    column = "B";
+    line = 1;
+    assertEquals(x.remove_piece(line, column, 2), true);
+    column = "E";
+    line = 6;
+    assertEquals(x.remove_piece(line, column, 2), true);
+    column = "F";
+    line = 5;
+    assertEquals(x.remove_piece(line, column, 2), true);
+
+    //YELLOW
+    x.change_player();
+    assertTrue(x.check_player() === 1);
+    column = "A";
+    line = 2;
+    assertEquals(x.remove_piece(line, column, 1), true);
+    column = "A";
+    line = 6;
+    assertEquals(x.remove_piece(line, column, 1), true);
+
+    //BLUE
+    x.change_player();
+    assertTrue(x.check_player() === 2);
+    column = "A";
+    line = 3;
+    assertEquals(x.remove_piece(line, column, 2), true);
+
+    //WHITE
+    x.change_player();
+    assertTrue(x.check_player() === 1);
+    column = "A";
+    line = 5;
+    assertEquals(x.remove_piece(line, column, 1), true);
+    column = "F";
+    line = 4;
+    assertEquals(x.remove_piece(line, column, 1), true);
+    column = "F";
+    line = 1;
+    assertEquals(x.remove_piece(line, column, 1), true);
+    column = "C";
+    line = 1;
+    assertEquals(x.remove_piece(line, column, 1), true);
+
+    //RED
+    x.change_player();
+    assertTrue(x.check_player() === 2);
+    column = "E";
+    line = 1;
+    assertEquals(x.remove_piece(line, column, 2), true);
+    column = "F";
+    line = 3;
+    assertEquals(x.remove_piece(line, column, 2), true);
+    column = "D";
+    line = 6;
+    assertEquals(x.remove_piece(line, column, 2), true);
+    column = "A";
+    line = 4;
+    assertEquals(x.remove_piece(line, column, 2), true);
+
+    //BLUE
+    x.change_player();
+    assertTrue(x.check_player() === 1);
+    column = "D";
+    line = 3;
+    assertEquals(x.remove_piece(line, column, 1), true);
+    column = "F";
+    line = 2;
+    assertEquals(x.remove_piece(line, column, 1), true);
+    column = "B";
+    line = 6;
+    assertEquals(x.remove_piece(line, column, 1), true);
+
+    //YELLOW
+    x.change_player();
+    assertTrue(x.check_player() === 2);
+    column = "B";
+    line = 3;
+    assertEquals(x.remove_piece(line, column, 2), true);
+    column = "E";
+    line = 2;
+    assertEquals(x.remove_piece(line, column, 2), true);
+    column = "E";
+    line = 5;
+    assertEquals(x.remove_piece(line, column, 2), true);
+
+    //BLACK
+    x.change_player();
+    assertTrue(x.check_player() === 1);
+    column = "B";
+    line = 4;
+    assertEquals(x.remove_piece(line, column, 1), true);
+    column = "C";
+    line = 6;
+    assertEquals(x.remove_piece(line, column, 1), true);
+    column = "D";
+    line = 5;
+    assertEquals(x.remove_piece(line, column, 1), true);
+    column = "E";
+    line = 3;
+    assertEquals(x.remove_piece(line, column, 1), true);
+
+    assertEquals(x.win(), 1);
+};
